@@ -10,12 +10,16 @@ def _main():
    parser.add_argument('opcode_file')
    args = parser.parse_args()
 
-   print(args)
+   #print(args)
    values = list(_parse_ints(args.opcode_file))
 
    # values before crash
-   values[1] = 12
-   values[2] = 2
+   # values[1] = 12
+   # values[2] = 2
+
+   # part 2 (19690720)
+   # values[1] = 41
+   # values[2] = 12
 
    opcode_pos = 0
    chunk_no = 0
@@ -29,10 +33,10 @@ def _main():
       edited_position = values[opcode_pos + 3]
 
       if opcode is 1:
-         print(f'[{edited_position}] = {value_1} + {value_2}')
+         #print(f'[{edited_position}] = {value_1} + {value_2}')
          values[edited_position] = value_1 + value_2
       elif opcode is 2:
-         print(f'[{edited_position}] = {value_1} * {value_2}')
+         #print(f'[{edited_position}] = {value_1} * {value_2}')
          values[edited_position] = value_1 * value_2
       elif opcode is 99:
          break
@@ -40,21 +44,12 @@ def _main():
       chunk_no += 1
 
    print(values[0])
-   '''
-   for chunk in _list_to_chunks(values, 4):
 
-      edited_position = chunk_no + chunk[3]
-      if chunk[0] is 1:
-         values[edited_position] = 
-   '''
-   
+
 def _parse_ints(input_file: str) -> List[int]:
    with open(input_file, 'r') as i_file:
-      return [ int(n) for n in i_file.read().split(',') ]    
+      return [ int(n) for n in i_file.read().split(',') ]
 
-def _list_to_chunks(lst, n):
-   for i in range(0, len(lst), n):
-      yield lst[i:i + n]
 
 if __name__ == "__main__":
    _main()
